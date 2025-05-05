@@ -1,0 +1,48 @@
+[SerializeField] private float maxVida;
+//[SerializeField] private float maxVida = 100;
+[SerializeField] private Slider barraVida; ou public HealthBar barraVida
+
+
+private float vidaAtual;
+//private float maxVida;
+
+private void Start()
+{
+	vidaAtual = maxVida;
+	barraVida.SetSliderMax(maxVida);
+
+}
+
+2 -- >
+
+[SerializeField] private float maxVida = 100;
+[SerializeField] private Slider barraVida;
+
+private float maxVida;
+
+private void Start()
+{
+	
+
+}
+
+Mudar cor da barra de vida de acordo com o valor
+
+private void MudarCorBarra()
+{
+	Color cor;
+	
+	if(barraVida.value => 60)
+	{
+		color = Color.green;
+	}
+	else if((barraVida.value => 25) && (barraVida.value < 60))
+	{
+		color = Color.yellow;
+	}
+	else (barraVida.value < 25)
+	{
+		color = Color.red;
+	}
+
+	barraVida.fillRect.GetComponent<Background>.color = cor;
