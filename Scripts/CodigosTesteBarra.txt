@@ -1,0 +1,59 @@
+barraVida
+
+using UnityEditor.Search;
+using UnityEngine;
+using UnityEngine.UI;
+public class barraVida : MonoBehaviour
+{
+    public Slider BarraVida;
+    public Vida vidaPlayer;
+
+    public void Start()
+    {
+        vidaPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Vida>();
+        BarraVida = GetComponent<Slider>();
+        int vidaMax = vidaPlayer.vidaMax;
+        BarraVida.maxValue = vidaMax;
+        BarraVida.value = vidaPlayer.vidaMax;
+    }
+    public void ValorBarra(int danoVida)
+    {
+        BarraVida.value = danoVida;
+    }
+}
+
+
+Vida
+
+using UnityEditor.Search;
+using UnityEngine;
+using static UnityEditor.PlayerSettings;
+
+public class Vida : MonoBehaviour
+{
+    public int vidaAtual = 0;
+    public int vidaMax = 100;
+
+    public barraVida BarraVida;
+    void Start()
+    {
+        vidaAtual = vidaMax;
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            DanoPlayer(10);
+        }
+    }
+
+    public void DanoPlayer(int danoVida)
+    {
+        vidaAtual -= danoVida;
+        BarraVida.ValorBarra(vidaAtual);
+    }
+ 
+}
