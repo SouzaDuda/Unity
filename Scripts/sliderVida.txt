@@ -1,0 +1,68 @@
+using System.Drawing;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+//using UnityEngine.Color;
+using Color = UnityEngine.Color;
+using Image = UnityEngine.UI.Image;
+public class vidaControle : MonoBehaviour
+{
+    public static vidaControle instance;
+
+    public float vidaMax, vidaAtual;
+    public UnityEngine.UI.Slider sliderVida;
+
+    void Start()
+    {
+        vidaAtual = vidaMax;
+        sliderVida.value = vidaAtual;
+
+        //spawnPosition = transform.position;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Dano(10f);
+        }
+    }
+
+    void Dano(float amount)
+    {
+
+        vidaAtual -= amount;
+        sliderVida.value = vidaAtual;
+
+        if (vidaAtual > vidaMax)
+        {
+            vidaAtual = vidaMax;
+        }
+
+        if (vidaAtual <= 0)
+        {
+            Debug.Log("Funfa");
+        }
+    }
+
+    private void MudarCorSlider(Color cor)
+    {
+       //olor cor;
+
+        if (sliderVida.value >= 60)
+        {
+            cor = Color.green;
+        }
+        else if ((sliderVida.value >= 25) && (sliderVida.value < 60))
+        {
+            cor = Color.yellow;
+        }
+        else if(sliderVida.value < 25)
+        {
+            cor = Color.red;    
+        }
+        //iderVida.fillRect.GetComponent<Background>.color = cor;
+        sliderVida.fillRect.GetComponent<Image>().color = cor;
+    }
+
+}
