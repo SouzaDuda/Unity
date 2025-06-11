@@ -1,0 +1,91 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Rota : MonoBehaviour
+{
+	Transform[] objCasas;
+
+	public List<Transform> objCasasLista = new List<Transform>();
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+
+		Preencher();
+
+		for (int i = 0; i < objCasasLista[i].childCount; i++)
+		{
+			Vector3 posAtual = objCasasLista[i].position;
+			if (i > 0)
+			{
+				Vector3 posAnterior = objCasasLista[i - 1].position;
+				Gizmos.DrawLine(posAnterior, posAtual);
+			}
+
+		}
+
+		void Preencher()
+		{
+			objCasasLista.Clear();
+
+			objCasas = GetComponentsInChildren<Transform>();
+
+			foreach (Transform child in objCasas)
+			{
+				if (child != this.transform)
+				{
+					objCasasLista.Add(child);
+				}
+			}
+		}
+	}
+}
+
+
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class Rota : MonoBehaviour
+{
+	Transform[] childObjects;
+
+	public List<Transform> childObjectsList = new List<Transform>();
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+
+		FillNodes();
+
+		for (int i = 0; i < childObjectsList[i].childCount; i++)
+		{
+			Vector3 posAtual = childObjectsList[i].position;
+			if (i > 0)
+			{
+				Vector3 posAnterior = childObjectsList[i - 1].position;
+				Gizmos.DrawLine(posAnterior, posAtual);
+			}
+
+		}
+
+		void FillNodes()
+		{
+			childObjectsList.Clear();
+
+			childObjects = GetComponentsInChildren<Transform>();
+
+			foreach (Transform child in childObjects)
+			{
+				if (child != this.transform)
+				{
+					childObjectsList.Add(child);
+				}
+			}
+		}
+	}
+}
